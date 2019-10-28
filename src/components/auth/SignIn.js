@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { signIn } from '../../store/actions/authActions'
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-//import './App.css';
+import { Redirect } from 'react-router-dom'
+//import './index.css';
 
 class SignIn extends Component {
   state = {
@@ -20,6 +23,7 @@ class SignIn extends Component {
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.GithubAuthProvider.PROVIDER_ID,
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
     ],
     callbacks: {
       // Avoid redirects after sign-in.
@@ -30,10 +34,10 @@ class SignIn extends Component {
   // Listen to the Firebase Auth state and set the local state.
   componentDidMount() {
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
-        (user) => this.setState({isSignedIn: !!user})
+      (user) => this.setState({ isSignedIn: !!user })
     );
   }
-  
+
   // Make sure we un-register Firebase observers when the component unmounts.
   componentWillUnmount() {
     this.unregisterAuthObserver();
@@ -46,31 +50,63 @@ class SignIn extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.signIn(this.state)
   }
+
+
   render() {
+    const { authError, auth } = this.props;
+    if (auth.uid) return <Redirect to='/' />
+    if (!this.state.isSignedIn) 
+    {
+      return (
+        <div className="container">
+          <form className="cyan darken-4" onSubmit={this.handleSubmit}>
+            <h5 className="pink-text text-lighten-1">Sign In</h5>
+            <div className="input-field">
+              <label htmlFor="email">Email</label>
+              <input type="email" id='email' onChange={this.handleChange} />
+            </div>
+            <div className="input-field">
+              <label htmlFor="password">Password</label>
+              <input type="password" id='password' onChange={this.handleChange} />
+            </div>
+            <div className="input-field">
+              <button className="btn pink lighten-1 z-depth-0">Login</button>
+              <div className="center red-text">
+                {authError ? <p>{authError}</p> : null}
+              </div>
+            </div>
+          </form>
+          <div className="container">
+            <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
+          </div>
+        </div>
+      )
+    }
     return (
       <div className="container">
-        <form className="white" onSubmit={this.handleSubmit}>
-          <h5 className="grey-text text-darken-3">Sign In</h5>
-          <div className="input-field">
-            <label htmlFor="email">Email</label>
-            <input type="email" id='email' onChange={this.handleChange} />
-          </div>
-          <div className="input-field">
-            <label htmlFor="password">Password</label>
-            <input type="password" id='password' onChange={this.handleChange} />
-          </div>
-          <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Login</button>
-          </div>
-        </form>
-        <div className="w3-container">
-          <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()}/>
-          </div>
+        <h1>FirebaseUI-React</h1>
+        <h1> with Firebase Authentication</h1>
+        <p>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
+          <img id="photo" className="pic" src={firebase.auth().currentUser.photoURL}/>
+        <button onClick={() => firebase.auth().signOut()}>Sign-out</button>
       </div>
-    )
+    );
   }
 }
 
-export default SignIn
+const mapStateToProps = (state) => {
+  return {
+    authError: state.auth.authError,
+    auth: state.firebase.auth
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signIn: (creds) => dispatch(signIn(creds))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
