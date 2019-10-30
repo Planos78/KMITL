@@ -10,6 +10,8 @@ import {
     Card, CardImg, CardTitle, CardText, CardColumns,
     CardSubtitle, CardBody
 } from 'reactstrap';
+import { Media } from 'reactstrap';
+
 
 class delivery extends Component {
     state = {
@@ -35,6 +37,41 @@ class delivery extends Component {
             <div>
                 <div className="container">
                     <br></br>
+                    <div className="container white">
+                        <Media>
+                            <Media left top href="#">
+                                <Media object data-src="holder.js/64x64" alt="Generic placeholder image" />
+                            </Media>
+                            <Media body>
+                                <Media heading>
+                                    Top aligned media
+                                </Media>
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                            </Media>
+                        </Media>
+                        <Media className="mt-1">
+                            <Media left middle href="#">
+                                <Media object data-src="holder.js/64x64" alt="Generic placeholder image" />
+                            </Media>
+                            <Media body>
+                                <Media heading>
+                                    Middle aligned media
+          </Media>
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+        </Media>
+                        </Media>
+                        <Media className="mt-1">
+                            <Media left bottom href="#">
+                                <Media object data-src="holder.js/64x64" alt="Generic placeholder image" />
+                            </Media>
+                            <Media body>
+                                <Media heading>
+                                    Bottom aligned media
+          </Media>
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+        </Media>
+                        </Media>
+                    </div>
                     <div className="row">
                         <div className="col-6">
                             <Card>
@@ -48,12 +85,12 @@ class delivery extends Component {
                                             <Input type="select" name="text" id="routePickup">
                                                 <option >--</option>
                                                 <option>คณะวิศวกรรมศาสตร์</option>
-                                                <option>คณะวิทย์ศาสตร์</option>
+                                                <option>คณะวิทยาศาสตร์</option>
                                                 <option>คณะสถาปัตยกรรมศาสตร์</option>
                                                 <option>คณะเทคโนโลยีสารสนเทศ</option>
                                                 <option>คณะเทคโนโลยรการเกษตร</option>
-                                                <option>คณะบริการธุรกิจ</option>
-                                                <option>คณะศิลป์ศาสตร์</option>
+                                                <option>คณะบริหารธุรกิจ</option>
+                                                <option>คณะศิลปศาสตร์</option>
                                             </Input>
                                         </Col>
                                     </FormGroup>
@@ -63,12 +100,12 @@ class delivery extends Component {
                                             <Input type="select" name="text" id="routeDropoff" placeholder="Drop off Location">
                                                 <option >--</option>
                                                 <option>คณะวิศวกรรมศาสตร์</option>
-                                                <option>คณะวิทย์ศาสตร์</option>
+                                                <option>คณะวิทยาศาสตร์</option>
                                                 <option>คณะสถาปัตยกรรมศาสตร์</option>
                                                 <option>คณะเทคโนโลยีสารสนเทศ</option>
                                                 <option>คณะเทคโนโลยรการเกษตร</option>
-                                                <option>คณะบริการธุรกิจ</option>
-                                                <option>คณะศิลป์ศาสตร์</option>
+                                                <option>คณะบริหารธุรกิจ</option>
+                                                <option>คณะศิลปศาสตร์</option>
                                             </Input>
                                         </Col>
                                     </FormGroup>
@@ -92,28 +129,28 @@ class delivery extends Component {
                                 <Col xs="6">
                                     <Label for="rout">Delivery Info</Label>
                                 </Col>
-                                <CardBody> 
-                                <form className="white" onSubmit={this.handleSubmit}>
+                                <CardBody>
+                                    <form className="white" onSubmit={this.handleSubmit}>
                                         <div className="input-field">
                                             <input type="text" id='name' onChange={this.handleChange} />
                                             <label htmlFor="name">Name</label>
                                         </div>
-                                    
+
                                         <div className="input-field">
                                             <input type="number" id='PhoneNumber' onChange={this.handleChange} />
                                             <label htmlFor="PhoneNumber">Phone Number</label>
                                         </div>
-                                    
+
                                         <div className="input-field">
                                             <input type="text" id='other' onChange={this.handleChange} />
                                             <label htmlFor="other">Other</label>
                                         </div>
-                                    
-                                    <Row>
-                                        <Col sm={{ size: 'auto', offset: 5 }}>
-                                            <button className="btn pink lighten-1" >Save</button>
-                                        </Col>
-                                    </Row>
+
+                                        <Row>
+                                            <Col sm={{ size: 'auto', offset: 5 }}>
+                                                <button className="btn pink lighten-1" >Save</button>
+                                            </Col>
+                                        </Row>
                                     </form>
                                 </CardBody>
                             </Card>
