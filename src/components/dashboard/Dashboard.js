@@ -18,7 +18,7 @@ class Dashboard extends Component {
       <div className="dashboard container">
         <div className="row">
           <div className="col s12 m6">
-            <Delivery />
+            { <ProjectList projects={projects} /> }
           </div>
         </div>
       </div>

@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { deliveryExpress } from '../../store/actions/deliveryActions'
+import { Redirect } from 'react-router-dom'
 import { Jumbotron, Button } from 'reactstrap';
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
@@ -8,74 +11,130 @@ import {
     CardSubtitle, CardBody
 } from 'reactstrap';
 
-const delivery = (props) => {
-    return (
-        <div>
-            <div className="container">
-                <br></br>
-                <div className="row">
-                    <div className="col-6">
-                        <Col xs="6">
-                            <Label for="rout">ROUTE</Label>
-                        </Col>
-                        <FormGroup row>
-                            <Col sm={10}>
-                                <Input type="text" name="text" id="routpickup" placeholder="Pick up Location" />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup row>
-                            <Col sm={10}>
-                                <Input type="text" name="text" id="routdropoff" placeholder="Drop off Location" />
-                            </Col>
-                        </FormGroup>
+class delivery extends Component {
+    state = {
+        name: '',
+        PhoneNumber: '',
+        other: ''
+    }
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+    handleSubmit = (e) => {
+        e.preventDefault();
+        // console.log(this.state);
+        this.props.deliveryExpress(this.state);
+        this.props.history.push('/');
+    }
+    render() {
+        const { auth } = this.props;
+        if (!auth.uid) return <Redirect to='/signin' />
+        return (
+            <div>
+                <div className="container">
+                    <br></br>
+                    <div className="row">
+                        <div className="col-6">
+                            <Card>
+                                <Col xs="6">
+                                    <Label for="route">ROUTE</Label>
+                                </Col>
+                                <CardBody>
+                                    <FormGroup row>
+                                        <Col sm={10}>
+                                            <Label for="pickUpLocation">Pick up Location</Label>
+                                            <Input type="select" name="text" id="routePickup">
+                                                <option >--</option>
+                                                <option>คณะวิศวกรรมศาสตร์</option>
+                                                <option>คณะวิทย์ศาสตร์</option>
+                                                <option>คณะสถาปัตยกรรมศาสตร์</option>
+                                                <option>คณะเทคโนโลยีสารสนเทศ</option>
+                                                <option>คณะเทคโนโลยรการเกษตร</option>
+                                                <option>คณะบริการธุรกิจ</option>
+                                                <option>คณะศิลป์ศาสตร์</option>
+                                            </Input>
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Col sm={10}>
+                                            <Label for="pickUpLocation">Drop off Location</Label>
+                                            <Input type="select" name="text" id="routeDropoff" placeholder="Drop off Location">
+                                                <option >--</option>
+                                                <option>คณะวิศวกรรมศาสตร์</option>
+                                                <option>คณะวิทย์ศาสตร์</option>
+                                                <option>คณะสถาปัตยกรรมศาสตร์</option>
+                                                <option>คณะเทคโนโลยีสารสนเทศ</option>
+                                                <option>คณะเทคโนโลยรการเกษตร</option>
+                                                <option>คณะบริการธุรกิจ</option>
+                                                <option>คณะศิลป์ศาสตร์</option>
+                                            </Input>
+                                        </Col>
+                                    </FormGroup>
 
-                        <Label for="service">ADDITIONAL SERVICES</Label>
-                        <FormGroup check>
-                            <FormGroup>
-                                <div>
-                                    <CustomInput type="checkbox" id="exampleCustomCheckbox" label="Purchase Service" />
-                                    <CustomInput type="checkbox" id="exampleCustomCheckbox2" label="Round Trip" />
-                                    <CustomInput type="checkbox" id="exampleCustomCheckbox3" label="Food Delivery" />
-                                </div>
-                            </FormGroup>
-                        </FormGroup>
-                        <Button>Submit</Button>
+                                    <Label for="service">ADDITIONAL SERVICES</Label>
+                                    <FormGroup check>
+                                        <FormGroup>
+                                            <div>
+                                                <CustomInput type="checkbox" id="exampleCustomCheckbox" label="Purchase Service" />
+                                                <CustomInput type="checkbox" id="exampleCustomCheckbox2" label="Round Trip" />
+                                                <CustomInput type="checkbox" id="exampleCustomCheckbox3" label="Food Delivery" />
+                                            </div>
+                                        </FormGroup>
+                                    </FormGroup>
+                                    <Button>Submit</Button>
+                                </CardBody>
+                            </Card>
+                        </div>
+                        <div className="col-6">
+                            <Card>
+                                <Col xs="6">
+                                    <Label for="rout">Delivery Info</Label>
+                                </Col>
+                                <CardBody> 
+                                <form className="white" onSubmit={this.handleSubmit}>
+                                        <div className="input-field">
+                                            <input type="text" id='name' onChange={this.handleChange} />
+                                            <label htmlFor="name">Name</label>
+                                        </div>
+                                    
+                                        <div className="input-field">
+                                            <input type="number" id='PhoneNumber' onChange={this.handleChange} />
+                                            <label htmlFor="PhoneNumber">Phone Number</label>
+                                        </div>
+                                    
+                                        <div className="input-field">
+                                            <input type="text" id='other' onChange={this.handleChange} />
+                                            <label htmlFor="other">Other</label>
+                                        </div>
+                                    
+                                    <Row>
+                                        <Col sm={{ size: 'auto', offset: 5 }}>
+                                            <button className="btn pink lighten-1" >Save</button>
+                                        </Col>
+                                    </Row>
+                                    </form>
+                                </CardBody>
+                            </Card>
+                        </div>
                     </div>
-                    <div className="col-6">
-                        <Card>
-                            <Col xs="6">
-                                <Label for="rout">Delivery Info</Label>
-                            </Col>
-                            <CardBody>
-                                <FormGroup>
-                                    <Input type="text" name="name" id="Name" placeholder="Name" />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="text" name="Phone" id="Phone" placeholder="Phone Number" />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Input type="text" name="other" id="other" placeholder="Other" />
-                                </FormGroup>
-                                <Row>
-                                    <Col sm={{ size: 'auto', offset: 1 }}>
-                                        <Button>Cancle</Button>
-                                    </Col>
-                                    <Col sm={{ size: 'auto', offset: 1 }}>
-                                        <Button color="info">Save</Button>{' '}
-                                    </Col>
-                                </Row>
-                            </CardBody>
-                        </Card>
-
-
-
-                    </div>
-
-
                 </div>
             </div>
-        </div>
-    );
-};
+        )
+    }
+}
 
-export default delivery;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        deliveryExpress: (deliveryProject) => dispatch(deliveryExpress(deliveryProject))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(delivery)
