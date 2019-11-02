@@ -15,11 +15,16 @@ const DeliveryDetails = (props) => {
           <p className="grey-text">Name: {deliveryProject.name}</p>
           <p className="grey-text">PhoneNumber: {deliveryProject.PhoneNumber}</p>
           <p className="grey-text">Other: {deliveryProject.other}</p>
+          <p className="grey-text">Route Pick Up: {deliveryProject.routePickup}</p>
+          <p className="grey-text">Purchase Service: {deliveryProject.additionalServicePurchase}</p>
+          <p className="grey-text">Round Trip: {deliveryProject.additionalServiceRoundTrip}</p>
+          <p className="grey-text">Food Delivery: {deliveryProject.additionalServiceFoodDelivery}</p>
           <br/>
           <h5>Destination</h5>
-          <p className="grey-text">{deliveryProject.destinationName}</p>
-          <p className="grey-text">{deliveryProject.destinationPhoneNumber}</p>
-          <p className="grey-text">{deliveryProject.destinationOther}</p>
+          <p className="grey-text">Name:{deliveryProject.destinationName}</p>
+          <p className="grey-text">PhoneNumber: {deliveryProject.destinationPhoneNumber}</p>
+          <p className="grey-text">Other: {deliveryProject.destinationOther}</p>
+          <p className="grey-text">Route Drop Off: {deliveryProject.routeDropoff}</p>
         </div>
         <div className="card-action ">
           <div>History of {deliveryProject.name} </div>

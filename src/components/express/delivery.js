@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { deliveryExpress } from '../../store/actions/deliveryActions'
 import { Redirect } from 'react-router-dom'
-import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Form, FormGroup, Label, Input, FormText, } from 'reactstrap';
 import { Container, Col, Row, Toast, ToastBody, ToastHeader, CustomInput } from 'reactstrap';
 import {
     Card, CardImg, CardTitle, CardText, CardColumns,
@@ -17,7 +17,12 @@ class delivery extends Component {
         other: '',
         destinationName: '',
         destinationPhoneNumber: '',
-        destinationOther: ''
+        destinationOther: '',
+        routePickup:'',
+        routeDropoff:'',
+        additionalServicePurchase:'',
+        additionalServiceRoundTrip:'',
+        additionalServiceFoodDelivery:''
     }
     handleChange = (e) => {
         this.setState({
@@ -44,18 +49,17 @@ class delivery extends Component {
                                     <FormGroup row>
                                         <Col sm={10}>
                                             <form className="white" onSubmit={this.handleSubmit}>
-                                                <Label for="pickUpLocation">Pick up Location</Label>
-                                                <Input type="select" name="text" id="routePickup">
-                                                    <option >--</option>
-                                                    <option>คณะวิศวกรรมศาสตร์</option>
-                                                    <option>คณะวิทยาศาสตร์</option>
-                                                    <option>คณะสถาปัตยกรรมศาสตร์</option>
-                                                    <option>คณะเทคโนโลยีสารสนเทศ</option>
-                                                    <option>คณะเทคโนโลยรการเกษตร</option>
-                                                    <option>คณะบริหารธุรกิจ</option>
-                                                    <option>คณะศิลปศาสตร์</option>
-                                                </Input>
-
+                                                <h5>Pick up Location</h5>
+                                                <select class="browser-default" id="routePickup" required onChange={this.handleChange} >
+                                                    <option value="" disabled selected>Choose your location</option>
+                                                    <option value="คณะวิศวกรรมศาสตร์">คณะวิศวกรรมศาสตร์</option>
+                                                    <option value="คณะวิทยาศาสตร์">คณะวิทยาศาสตร์</option>
+                                                    <option value="คณะสถาปัตยกรรมศาสตร์">คณะสถาปัตยกรรมศาสตร์</option>
+                                                    <option value="คณะเทคโนโลยีสารสนเทศ">คณะเทคโนโลยีสารสนเทศ</option>
+                                                    <option value="คณะเทคโนโลยีการเกษตร">คณะเทคโนโลยีการเกษตร</option>
+                                                    <option value="คณะบริหารธุรกิจ">คณะบริหารธุรกิจ</option>
+                                                    <option value="คณะศิลปศาสตร์">คณะศิลปศาสตร์</option>
+                                                </select>
                                                 <div className="input-field">
                                                     <input
                                                         type="text"
@@ -88,17 +92,17 @@ class delivery extends Component {
                                                 <br />
                                                 <br />
                                                 <br />
-                                                <Label for="pickUpLocation">Drop off Location</Label>
-                                                <Input type="select" name="text" id="routeDropoff" placeholder="Drop off Location">
-                                                    <option >--</option>
-                                                    <option>คณะวิศวกรรมศาสตร์</option>
-                                                    <option>คณะวิทยาศาสตร์</option>
-                                                    <option>คณะสถาปัตยกรรมศาสตร์</option>
-                                                    <option>คณะเทคโนโลยีสารสนเทศ</option>
-                                                    <option>คณะเทคโนโลยรการเกษตร</option>
-                                                    <option>คณะบริหารธุรกิจ</option>
-                                                    <option>คณะศิลปศาสตร์</option>
-                                                </Input>
+                                                <h5>Drop off Location</h5>
+                                                <select class="browser-default" id="routeDropoff" required onChange={this.handleChange} >
+                                                    <option value="" disabled selected>Choose your location</option>
+                                                    <option value="คณะวิศวกรรมศาสตร์">คณะวิศวกรรมศาสตร์</option>
+                                                    <option value="คณะวิทยาศาสตร์">คณะวิทยาศาสตร์</option>
+                                                    <option value="คณะสถาปัตยกรรมศาสตร์">คณะสถาปัตยกรรมศาสตร์</option>
+                                                    <option value="คณะเทคโนโลยีสารสนเทศ">คณะเทคโนโลยีสารสนเทศ</option>
+                                                    <option value="คณะเทคโนโลยีการเกษตร">คณะเทคโนโลยีการเกษตร</option>
+                                                    <option value="คณะบริหารธุรกิจ">คณะบริหารธุรกิจ</option>
+                                                    <option value="คณะศิลปศาสตร์">คณะศิลปศาสตร์</option>
+                                                </select>
 
                                                 {/* <Label for="rout">Delivery Info</Label> */}
                                                 <div className="input-field">
@@ -129,23 +133,35 @@ class delivery extends Component {
                                                         title="เพิ่มเติม"
                                                         onChange={this.handleChange} />
                                                     <label htmlFor="destinationOther">Other</label>
-                                                </div>
-                                                <Label for="service">ADDITIONAL SERVICES</Label>
-                                                <FormGroup check>
-                                                    <FormGroup>
-                                                        <div>
-                                                            <CustomInput type="checkbox" id="exampleCustomCheckbox" label="Purchase Service" />
-                                                            <CustomInput type="checkbox" id="exampleCustomCheckbox2" label="Round Trip" />
-                                                            <CustomInput type="checkbox" id="exampleCustomCheckbox3" label="Food Delivery" />
-                                                        </div>
-                                                    </FormGroup>
-                                                </FormGroup>
-                                                <button className="btn pink lighten-1" >Save</button>
+                                                </div >
+                                                <h5>ADDITIONAL SERVICES</h5>
+                                                <from action="#" required onChange={this.handleChange}> 
+                                                <p>
+                                                    <label>
+                                                        <input type="checkbox" id="additionalServicePurchase" />
+                                                        <span>Purchase Service</span>
+                                                    </label>
+                                                </p>
+                                                <p>
+                                                    <label>  
+                                                        <input type="checkbox" id="additionalServiceRoundTrip"/>
+                                                        <span>Round Trip</span>
+                                                    </label>
+                                                </p>
+                                                <p>
+                                                    <label>
+                                                        <input type="checkbox" id="additionalServiceFoodDelivery" />
+                                                        <span>Food Delivery</span>
+                                                    </label>
+                                                </p>
+                                                </from>
+                                                <button className="btn grey " >Submit</button>
                                             </form>
                                         </Col>
                                     </FormGroup>
                                 </CardBody>
                             </Card>
+
                         </div>
 
                     </div>

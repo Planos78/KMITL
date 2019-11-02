@@ -5,6 +5,10 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Redirect } from 'react-router-dom'
+import {
+  Card, CardImg, CardTitle, CardText, CardColumns,
+  CardSubtitle, CardBody
+} from 'reactstrap';
 //import './index.css';
 
 class SignIn extends Component {
@@ -61,7 +65,8 @@ class SignIn extends Component {
     {
       return (
         <div className="container">
-          <form className="cyan darken-4" onSubmit={this.handleSubmit}>
+          <Card>
+          <form  onSubmit={this.handleSubmit}>
             <h5 className="pink-text text-lighten-1">Sign In</h5>
             <div className="input-field">
               <label htmlFor="email">Email</label>
@@ -78,6 +83,7 @@ class SignIn extends Component {
               </div>
             </div>
           </form>
+          </Card>
           <div className="container">
             <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
           </div>

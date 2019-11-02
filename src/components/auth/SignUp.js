@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { signUp } from '../../store/actions/authActions'
+import {
+  Card, CardImg, CardTitle, CardText, CardColumns,
+  CardSubtitle, CardBody
+} from 'reactstrap';
 
 class SignUp extends Component {
   state = {
@@ -24,7 +28,8 @@ class SignUp extends Component {
     if (auth.uid) return <Redirect to='/' /> 
     return (
       <div className="container">
-        <form className="cyan darken-4" onSubmit={this.handleSubmit}>
+        <Card>
+        <form onSubmit={this.handleSubmit}>
           <h5 className="pink-text text-lighten-1">Sign Up</h5>
           <div className="input-field">
             <label htmlFor="email">Email</label>
@@ -49,6 +54,7 @@ class SignUp extends Component {
             </div>
           </div>
         </form>
+        </Card>
       </div>
     )
   }
