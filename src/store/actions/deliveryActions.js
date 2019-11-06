@@ -10,5 +10,6 @@ export const deliveryExpress = (deliveryProject) => {
       }).catch(err => {
         dispatch({ type: 'CREATE_DELIVERY_ERROR' }, err);
       });
+      firestore.collection('delivery').getFirestore('name')
     }
   };
