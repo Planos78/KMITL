@@ -10,5 +10,4 @@ const DeliverySummary = ({deliveryProject}) => {
     </div>
   )
 }
-
 export default DeliverySummary

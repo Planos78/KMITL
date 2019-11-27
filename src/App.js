@@ -10,7 +10,9 @@ import History from './components/express/history'
 import Delivery from './components/express/delivery'
 import DeliveryDetails from './components/express/DeliveryDetail'
 import firstpage from './components/dashboard/Firstpage'
+import firstpage2 from './components/dashboard/Firstpage2'
 import CreateProject from './components/projects/CreateProject'
+import ManagePayment from './components/express/ManagePayment'
 class App extends Component {
   render() {
     return (
@@ -24,6 +26,8 @@ class App extends Component {
             <Route path='/signin' component={SignIn} />
             <Route path='/signup' component={SignUp} />
             <Route path='/firstpage' component={firstpage} />
+            <Route path='/firstpage2' component={firstpage2} />
+            <Route path='/manage' component={ManagePayment} />
 
           </Switch>
         </div>

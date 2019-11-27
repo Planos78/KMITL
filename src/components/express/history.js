@@ -8,16 +8,23 @@ import { Redirect } from 'react-router-dom'
 
 class history extends Component {
   render() {
-    
+
     // console.log(this.props);
     const { delivery, auth } = this.props;
-    if(!auth.uid) return <Redirect to='/signin'/>
+    if (!auth.uid) return <Redirect to='/signin' />
 
     return (
       <div className="dashboard container">
         <div className="row">
           <div className="col s12 m6">
-            <DeliveryList delivery={delivery} /> 
+
+          <br></br>
+            <div class="jumbotron">
+              <h1><dt>HISTORY</dt></h1>
+              <hr class = "my-4"></hr>
+            </div>
+
+            <DeliveryList delivery={delivery} />
           </div>
         </div>
       </div>

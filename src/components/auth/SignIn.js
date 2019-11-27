@@ -67,17 +67,23 @@ class SignIn extends Component {
         <div className="container">
           <Card>
           <form  onSubmit={this.handleSubmit}>
-            <h5 className="pink-text text-lighten-1">Sign In</h5>
+            <h5 className="grey-text text-darken-1">Sign In</h5>
             <div className="input-field">
               <label htmlFor="email">Email</label>
-              <input type="email" id='email' onChange={this.handleChange} />
+              <input type="email" id='email' 
+              pattern = "[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+"
+              title="กรุณากรอกอีเมลให้ถูกรูปแบบ"
+              onChange={this.handleChange} />
             </div>
             <div className="input-field">
               <label htmlFor="password">Password</label>
-              <input type="password" id='password' onChange={this.handleChange} />
+              <input type="password" id='password' 
+              pattern="^[A-Za-z0-9]{8,}$"
+              title="กรุณากรอกรหัสผ่านอย่างน้อย 8 ตัว ในช่วง A-Z , a-z ,0-9"
+              onChange={this.handleChange} />
             </div>
             <div className="input-field">
-              <button className="btn pink lighten-1 z-depth-0">Login</button>
+              <button className="btn btn-success btn-md btn-block grey darken-2">Login</button>
               <div className="center red-text">
                 {authError ? <p>{authError}</p> : null}
               </div>
